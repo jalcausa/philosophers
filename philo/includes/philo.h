@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 23:44:22 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/09 23:55:44 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:15:21 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct s_philosopher
 {
@@ -45,31 +46,11 @@ typedef struct s_table
 	t_philosopher	*philosophers;
 }	t_table;
 
-/* Main functions */
-int		init_data(t_data *data, char **argv);
-void	start_simulation(t_data *data);
-void	cleanup(t_data *data);
+/* Parsing.c */
+int		args_ok(int argc, char **argv);
+void	help_message(void);
 
-/* Philosopher routines */
-void	*philosopher_routine(void *arg);
-void	eat(t_philosopher *philo);
-void	sleep_philo(t_philosopher *philo);
-void	think(t_philosopher *philo);
-
-/* Monitor */
-void	*monitor_routine(void *arg);
-
-/* Utils */
-long	get_current_time(void);
-long	get_timestamp(t_data *data);
-void	print_status(t_philosopher *philo, char *status);
-void	ft_usleep(int milliseconds);
-
-/* Parsing & Validation */
-int		parse_arguments(int argc, char **argv);
-int		is_valid_number(char *str);
-
-/* Error handling */
-void	error_exit(char *message);
+/* Utils.c*/
+int		ft_atoi(const char *str);
 
 #endif
