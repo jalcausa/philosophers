@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 23:44:22 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 20:15:21 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:32:24 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_philosopher
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
-	struct s_data	*data;
+	struct s_table	*table;
 }	t_philosopher;
 
 typedef struct s_table
@@ -46,11 +46,18 @@ typedef struct s_table
 	t_philosopher	*philosophers;
 }	t_table;
 
-/* Parsing.c */
+/* parsing.c */
 int		args_ok(int argc, char **argv);
 void	help_message(void);
 
-/* Utils.c*/
+/* utils.c*/
 int		ft_atoi(const char *str);
+
+/* init.c */
+void	init_table(t_table *table, int argc, char **argv);
+void	init_forks(t_table *table);
+void	init_mutexes(t_table *table);
+void	init_philos(t_table *table);
+void	init_data(t_table *table, int argc, char **argv);
 
 #endif

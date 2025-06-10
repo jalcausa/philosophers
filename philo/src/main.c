@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:40:21 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 20:16:04 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:34:58 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 			help_message();
 			return (0);
 		}
-		//init_table(&academy, argc, argv);
+		init_data(&table, argc, argv);
 	}
 	else
 		help_message();

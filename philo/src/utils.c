@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:56:36 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 19:57:50 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/10 20:30:16 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ int	ft_atoi(const char *str)
 	}
 	num *= sn;
 	return (num);
+}
+
+long	get_actual_time(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
