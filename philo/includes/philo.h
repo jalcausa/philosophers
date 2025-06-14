@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 23:44:22 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 20:32:24 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:54:01 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_philosopher
 	int				id;
 	int				meals_eaten;
 	long			last_meal_time;
+	pthread_mutex_t	meal_mutex;
 	pthread_t		thread;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
@@ -52,6 +53,10 @@ void	help_message(void);
 
 /* utils.c*/
 int		ft_atoi(const char *str);
+long	get_actual_time(void);
+void	ft_usleep(int time);
+void	print_status(t_philosopher *philo, char *status);
+void	print_death(t_philosopher *philo);
 
 /* init.c */
 void	init_table(t_table *table, int argc, char **argv);
@@ -59,5 +64,20 @@ void	init_forks(t_table *table);
 void	init_mutexes(t_table *table);
 void	init_philos(t_table *table);
 void	init_data(t_table *table, int argc, char **argv);
+
+/* simulation.c */
+void	take_forks(t_philosopher *philo);
+void	drop_forks(t_philosopher *philo);
+int		simulation_ended(t_table *table);
+void	*philosopher_routine(void *arg);
+void	start_simulation(t_table *table);
+
+/* monitor.c*/
+int		check_philosopher_death(t_table *table, int i);
+int		check_all_ate_enough(t_table *table);
+void	monitor_philosophers(t_table *table);
+
+/* cleanup.c */
+void	cleanup(t_table *table);
 
 #endif

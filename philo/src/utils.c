@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:56:36 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 20:30:16 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:53:35 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,33 @@ long	get_actual_time(void)
 
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}
+
+void	ft_usleep(int time)
+{
+	if (time <= 0)
+		usleep(0);
+	else
+		usleep(time * 1000);
+}
+
+void	print_status(t_philosopher *philo, char *status)
+{
+    pthread_mutex_lock(&philo->table->death_mutex);
+    if (!philo->table->simulation_ended)
+    {
+        pthread_mutex_lock(&philo->table->print_mutex);
+        long timestamp = get_actual_time() - philo->table->start_time;
+        printf("%ld %d %s\n", timestamp, philo->id, status);
+        pthread_mutex_unlock(&philo->table->print_mutex);
+    }
+    pthread_mutex_unlock(&philo->table->death_mutex);
+}
+
+void	print_death(t_philosopher *philo)
+{
+    pthread_mutex_lock(&philo->table->print_mutex);
+    long timestamp = get_actual_time() - philo->table->start_time;
+    printf("%ld %d died\n", timestamp, philo->id);
+    pthread_mutex_unlock(&philo->table->print_mutex);
 }

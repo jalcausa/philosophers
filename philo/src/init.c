@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 20:15:50 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/10 20:34:53 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/14 13:16:16 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_philos(t_table *table)
 		table->philosophers[i].id = i + 1;
 		table->philosophers[i].meals_eaten = 0;
 		table->philosophers[i].last_meal_time = 0;
+		pthread_mutex_init(&table->philosophers[i].meal_mutex, NULL);
 		table->philosophers[i].table = table;
 		table->philosophers[i].left_fork = &table->forks[i];
 		if (i == table->num_philosophers - 1)
