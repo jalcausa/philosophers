@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:56:36 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/15 12:31:40 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:54:48 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ long	get_actual_time(void)
 
 void	ft_usleep(int time)
 {
-	if (time <= 0)
-		usleep(0);
-	else
-		usleep(time * 1000);
+	long	end;
+
+	end = get_actual_time() + time;
+	while (get_actual_time() < end)
+		usleep(10);
 }
 
 void	print_status(t_philosopher *philo, char *status)
