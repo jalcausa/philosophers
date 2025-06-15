@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cleanup.c                                          :+:      :+:    :+:   */
+/*   simulation2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/14 12:32:45 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/15 12:24:33 by jalcausa         ###   ########.fr       */
+/*   Created: 2025/06/15 12:39:46 by jalcausa          #+#    #+#             */
+/*   Updated: 2025/06/15 12:40:14 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	cleanup(t_table *table)
+void	update_meal_time(t_philosopher *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < table->num_philosophers)
-	{
-		pthread_mutex_destroy(&table->forks[i]);
-		pthread_mutex_destroy(&table->philosophers[i].meal_mutex);
-		i++;
-	}
-	pthread_mutex_destroy(&table->print_mutex);
-	pthread_mutex_destroy(&table->death_mutex);
-	free(table->forks);
-	free(table->philosophers);
+	pthread_mutex_lock(&philo->meal_mutex);
+	philo->last_meal_time = get_actual_time();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(&philo->meal_mutex);
 }

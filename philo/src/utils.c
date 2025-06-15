@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 19:56:36 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/14 13:53:35 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:31:40 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,21 +55,25 @@ void	ft_usleep(int time)
 
 void	print_status(t_philosopher *philo, char *status)
 {
-    pthread_mutex_lock(&philo->table->death_mutex);
-    if (!philo->table->simulation_ended)
-    {
-        pthread_mutex_lock(&philo->table->print_mutex);
-        long timestamp = get_actual_time() - philo->table->start_time;
-        printf("%ld %d %s\n", timestamp, philo->id, status);
-        pthread_mutex_unlock(&philo->table->print_mutex);
-    }
-    pthread_mutex_unlock(&philo->table->death_mutex);
+	long	timestamp;
+
+	pthread_mutex_lock(&philo->table->death_mutex);
+	if (!philo->table->simulation_ended)
+	{
+		pthread_mutex_lock(&philo->table->print_mutex);
+		timestamp = get_actual_time() - philo->table->start_time;
+		printf("%ld %d %s\n", timestamp, philo->id, status);
+		pthread_mutex_unlock(&philo->table->print_mutex);
+	}
+	pthread_mutex_unlock(&philo->table->death_mutex);
 }
 
 void	print_death(t_philosopher *philo)
 {
-    pthread_mutex_lock(&philo->table->print_mutex);
-    long timestamp = get_actual_time() - philo->table->start_time;
-    printf("%ld %d died\n", timestamp, philo->id);
-    pthread_mutex_unlock(&philo->table->print_mutex);
+	long	timestamp;
+
+	pthread_mutex_lock(&philo->table->print_mutex);
+	timestamp = get_actual_time() - philo->table->start_time;
+	printf("%ld %d died\n", timestamp, philo->id);
+	pthread_mutex_unlock(&philo->table->print_mutex);
 }

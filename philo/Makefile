@@ -13,6 +13,7 @@ SRCS =	src/main.c			\
 		src/init.c			\
 		src/utils.c			\
 		src/simulation.c	\
+		src/simulation2.c	\
 		src/monitor.c		\
 		src/cleanup.c
 

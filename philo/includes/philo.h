@@ -6,7 +6,7 @@
 /*   By: jalcausa <jalcausa@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 23:44:22 by jalcausa          #+#    #+#             */
-/*   Updated: 2025/06/14 13:54:01 by jalcausa         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:40:27 by jalcausa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,13 @@ void	take_forks(t_philosopher *philo);
 void	drop_forks(t_philosopher *philo);
 int		simulation_ended(t_table *table);
 void	*philosopher_routine(void *arg);
+void	update_meal_time(t_philosopher *philo);
 void	start_simulation(t_table *table);
 
 /* monitor.c*/
 int		check_philosopher_death(t_table *table, int i);
 int		check_all_ate_enough(t_table *table);
+int		update_all_ate_enough(t_table *table, int all_ate_enough);
 void	monitor_philosophers(t_table *table);
 
 /* cleanup.c */
